@@ -1,0 +1,70 @@
+\subsection{One-Period Binomial Model}
+
+\begin{definition}{Time zero}
+The beginning of the time period.
+\end{definition}
+\begin{definition}{Time one}
+The end of the time period.
+\end{definition}
+
+\begin{lemma}
+Let $S_0$ be the value of the stock $S$ at time zero.
+\end{lemma}
+\begin{lemma}
+Let $S_1(H)$ be the value of the stock $S$ at time one in the ``heads'' case. 
+\end{lemma}
+\begin{lemma}
+Let $S_1(T)$ be the value of the stock $S$ at time one in the ``tails'' case.
+\end{lemma}
+
+\begin{lemma}
+Let $p$ be the probability of $S$ having value $S_1(H)$ at time one, and $q = 1 - p$ be the probability of $S$ having value $S_1(T)$ at time one.
+\end{lemma}
+
+\begin{tikzpicture}
+  [auto]
+  \node (s0) at (0,1) {$S_0$};
+  \node (s1h) at (2,0)  {$S_1(H) = uS_0$};
+  \node (s1t) at (2,2)  {$S_1(T) = dS_0$};
+
+  \foreach \from/\to in {s0/s1h,s0/s1t}
+    \draw (\from) -- (\to);
+\end{tikzpicture}
+
+\begin{lemma}
+Let $u$ be the up factor, and $d$ be the down factor.
+\[
+u = \cfrac{S_1(H)}{S_0}, d = \cfrac{S_1(T)}{S_0}
+\]
+\end{lemma}
+
+<<factor>>=
+typedef double (*factor)(void *context, double s_time_zero, double s_time_one);
+double one_period_factor(void *context, double s_time_zero, double s_time_one) {
+  return s_time_one / s_time_zero;
+}
+
+typedef struct {
+  factor up;
+  factor down;
+} factor_vtable;
+
+typedef struct {
+  factor_vtable* vtable;
+  void *context;
+} Factor;
+
+Factor *
+@
+
+<<one-period.h>>=
+#pragma once
+@
+<<one-period.c>>=
+#include "one_period.h"
+#include <stdio.h>
+
+int main() {
+  puts("Hello World!");
+}
+@

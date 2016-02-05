@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 include(noweb.cmake)
 include(UseLatex)
 set(quant_C
-    main.c)
+    binomial/one_period.c)
 set(quant_H
-    main.h)
+    binomial/one_period.h)
 set(quant_TEX
-    main.tex)
+    binomial/one_period.tex)
 
 tangle("${quant_H}")
 tangle("${quant_C}")
@@ -18,7 +18,8 @@ add_executable(quant ${quant_C})
 add_dependencies(quant tangle)
 target_link_libraries(quant m)
 
-add_latex_document(cmake_noweb.tex
+add_latex_document(libquant.tex
+                   INPUTS binomial/introduction.tex preamble/preamble.tex preamble/noweb.tex preamble/theorem.tex
                    FORCE_PDF
-                   TARGET_NAME cmake_noweb)
-add_dependencies(cmake_noweb_pdf weave)
+                   TARGET_NAME libquant)
+add_dependencies(libquant_pdf weave)
