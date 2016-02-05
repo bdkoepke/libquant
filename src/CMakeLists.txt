@@ -2,11 +2,14 @@ cmake_minimum_required(VERSION 2.8)
 include(noweb.cmake)
 include(UseLatex)
 set(quant_C
-    binomial/one_period.c)
+    binomial/one_period.c
+    binomial/tuple.c)
 set(quant_H
-    binomial/one_period.h)
+    binomial/one_period.h
+    binomial/tuple.h)
 set(quant_TEX
-    binomial/one_period.tex)
+    binomial/one_period.tex
+    binomial/tuple.tex)
 
 tangle("${quant_H}")
 tangle("${quant_C}")

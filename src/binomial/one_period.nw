@@ -59,6 +59,7 @@ Factor *
 
 <<one-period.h>>=
 #pragma once
+#include "tuple.h"
 @
 <<one-period.c>>=
 #include "one_period.h"
@@ -66,5 +67,7 @@ Factor *
 
 int main() {
   puts("Hello World!");
+  Tuple *t = tuple_new((void *)1, (void *)2);
+  printf("%d\n", (int)tuple_first(t));
 }
 @

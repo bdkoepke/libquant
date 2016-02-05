@@ -1,17 +1,30 @@
 <<tuple.h>>=
 #pragma once
 #include <stdlib.h>
+typedef struct _Tuple Tuple;
+
+Tuple *tuple_new(void *, void *);
+void *tuple_first(Tuple *);
+void *tuple_second(Tuple *);
 @
 <<tuple.c>>=
 #include "tuple.h"
-typedef struct {
+struct _Tuple {
   void *first, *second;
-} Tuple;
+};
 
 Tuple *tuple_new(void *first, void *second) {
   Tuple *t = malloc(sizeof(Tuple));
   t->first = first;
   t->second = second;
   return t;
+}
+
+void *tuple_first(Tuple *self) {
+  return self->first;
+}
+
+void *tuple_second(Tuple *self) {
+  return self->second;
 }
 @
