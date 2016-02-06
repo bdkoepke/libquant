@@ -1,0 +1,65 @@
+\section{Pair}
+A pair is a two-element immutable tuple. We start by forward declaring the pair struct in the header. This way we can hide the implementation of the tuple.
+
+<<typedef-pair-h>>=
+typedef struct _Pair Pair;
+@
+
+We also need to declare the struct in the implementation file, but the details can only be accessed from the implementation file.
+
+<<typedef-pair-c>>=
+struct _Pair {
+  void *first, *second;
+};
+@
+
+Next we need a way to create new pairs given two items. We accept \textbf{void *} so we can hold elements of any type, including NULL to simulate an empty pair.
+
+<<pair-new-h>>=
+Pair *pair_new(void *, void *);
+@
+
+And the corresponding pair implementation. In this instance we are using the built-in malloc for simplicity. 
+
+<<pair-new-c>>=
+Pair *pair_new(void *first, void *second) {
+  Pair *t = malloc(sizeof(Pair));
+  t->first = first;
+  t->second = second;
+  return t;
+}
+@
+
+We also need a couple of accessors so we can get at the elements of the pair. Here I decided to allow the mutation of the items from the pair by default, a truly immutable pair wouldn't allow the mutation of the elements inside the pair either.
+
+<<pair-get-h>>=
+void *pair_first(Pair *);
+void *pair_second(Pair *);
+@
+
+To implement we just return the references to the internal pair items.
+
+<<pair-get-c>>=
+void *pair_first(Pair *self) {
+  return self->first;
+}
+void *pair_second(Pair *self) {
+  return self->second;
+}
+@
+
+Finally we have the full pair implementation.
+
+<<pair.h>>=
+#pragma once
+<<typedef-pair-h>>
+<<pair-new-h>>
+<<pair-get-h>>
+@
+<<pair.c>>=
+#include "pair.h"
+#include <stdlib.h>
+<<typedef-pair-c>>
+<<pair-new-c>>
+<<pair-get-c>>
+@

@@ -3,13 +3,13 @@ include(noweb.cmake)
 include(UseLatex)
 set(quant_C
     binomial/one_period.c
-    binomial/tuple.c)
+    binomial/pair.c)
 set(quant_H
     binomial/one_period.h
-    binomial/tuple.h)
+    binomial/pair.h)
 set(quant_TEX
     binomial/one_period.tex
-    binomial/tuple.tex)
+    binomial/pair.tex)
 
 tangle("${quant_H}")
 tangle("${quant_C}")

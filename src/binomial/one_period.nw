@@ -47,19 +47,16 @@ double one_period_factor(void *context, double s_time_zero, double s_time_one) {
 typedef struct {
   factor up;
   factor down;
-} factor_vtable;
+} factor_pair;
 
-typedef struct {
-  factor_vtable* vtable;
-  void *context;
-} Factor;
-
-Factor *
+factor_pair default_one_period_factor = { .up = one_period_factor, .down = one_period_factor };
 @
+
+Trivial example with a simple OO tuple...
 
 <<one-period.h>>=
 #pragma once
-#include "tuple.h"
+#include "pair.h"
 @
 <<one-period.c>>=
 #include "one_period.h"
@@ -67,7 +64,7 @@ Factor *
 
 int main() {
   puts("Hello World!");
-  Tuple *t = tuple_new((void *)1, (void *)2);
-  printf("%d\n", (int)tuple_first(t));
+  Pair *p = pair_new((void *)1, (void *)2);
+  printf("%d\n", (int)pair_first(p));
 }
 @
